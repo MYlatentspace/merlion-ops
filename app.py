@@ -67,7 +67,7 @@ def execute_merlion_ops_audit(user_query: str):
     3. DATA PRIVACY INVARIANT: To prevent PII leaks, anonymize corporate names and address tokens in the final output (e.g., Company_Alpha, Postal: 018XXX).
     """
 
-    print("🧠 [Gemini Flash Loop] Evaluating data compliance matrix...")
+    print("[Gemini Flash Loop] Evaluating data compliance matrix...")
     try:
         response = client.models.generate_content(
             model='gemini-2.5-flash', # Chosen for high structural performance and low latency
@@ -78,10 +78,10 @@ def execute_merlion_ops_audit(user_query: str):
                 temperature=0.1 # Enforces deterministic reasoning behavior
             )
         )
-        print("\n🏆 === MERLION-OPS COMPLIANCE AUDIT REPORT ===")
+        print("\n === MERLION-OPS COMPLIANCE AUDIT REPORT ===")
         print(response.text)
         print("==============================================")
-        print("📡 Local OpenTelemetry Spans Compiled Successfully. Ready for Arize Phoenix routing.")
+        print("Local OpenTelemetry Spans Compiled Successfully. Ready for Arize Phoenix routing.")
     except Exception as e:
         print(f"❌ Execution graph interrupted: {str(e)}")
 

@@ -1,10 +1,10 @@
-# 🦁 Merlion-Ops: Agent Skill & Capability Manifest
+# Merlion-Ops: Agent Skill & Capability Manifest
 
 This document outlines the structural skills, capabilities, and system tool mappings exposed to the `Merlion-Ops` Agent Engine for the Kaggle Agents for Business Track.
 
 ---
 
-## 🛠️ 1. Model Context Protocol (MCP) Mapping (Day 2 Schema)
+## 1. Model Context Protocol (MCP) Mapping (Day 2 Schema)
 The framework leverages a decoupled protocol pattern to separate raw data fetching from core semantic model reasoning.
 * **Skill Identifier:** `fetch_mock_government_data`
 * **Interface Type:** Decoupled Data Server Simulation
@@ -13,7 +13,7 @@ The framework leverages a decoupled protocol pattern to separate raw data fetchi
 
 ---
 
-## 🧠 2. Context Engineering & Memory State Dynamics (Day 3 Schema)
+## 2. Context Engineering & Memory State Dynamics (Day 3 Schema)
 To maintain an efficient token footprint, the agent bypasses conversational bloat by relying on strict system invariants.
 * **Orchestration Choice:** `gemini-2.5-flash` for high multi-variable processing density.
 * **Context Preservation:** Injects dynamic JSON arrays directly into the execution prompt layer alongside a hardened system instruction matrix.
@@ -21,7 +21,7 @@ To maintain an efficient token footprint, the agent bypasses conversational bloa
 
 ---
 
-## 🛡️ 3. Defensive Governance & Telemetry Guardrails (Day 4 Schema)
+## 3. Defensive Governance & Telemetry Guardrails (Day 4 Schema)
 System safety and regional corporate data compliance are aggressively enforced via two explicit boundaries.
 * **Skill Identifier:** `run_model_armor_shield`
 * **Security Filter Layer:** Intercepts user inputs *prior* to model inference to detect prompt injection exploits and block sensitive PII data leakage.

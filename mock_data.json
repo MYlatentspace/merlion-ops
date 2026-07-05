@@ -5,7 +5,8 @@
     "account_due_date": "2026-01-15",
     "annual_return_date": "2026-06-20",
     "postal_code": "018989",
-    "property_type": "HDB 3-Room Residential"
+    "property_type": "HDB 3-Room Residential",
+    "primary_ssic_business_type": "Freight Transport & Heavy Logistics"
   },
   {
     "uen": "SYNTH-1122-A",
@@ -13,6 +14,25 @@
     "account_due_date": "2026-03-01",
     "annual_return_date": "2026-03-05",
     "postal_code": "048616",
-    "property_type": "Commercial Tower"
+    "property_type": "Commercial Tower",
+    "primary_ssic_business_type": "Investment & Financial Holding"
+  },
+  {
+    "uen": "SYNTH-4455-B",
+    "company_name": "Apex Cloud Tech Solutions",
+    "account_due_date": "2026-04-12",
+    "annual_return_date": "2026-04-15",
+    "postal_code": "569812",
+    "property_type": "HDB 4-Room Residential",
+    "primary_ssic_business_type": "Software Development & IT Consulting"
+  },
+  {
+    "uen": "SYNTH-7766-M",
+    "company_name": "Vanguard Heavy Industrial Trades",
+    "account_due_date": "2026-02-28",
+    "annual_return_date": "2026-08-10",
+    "postal_code": "628401",
+    "property_type": "Industrial Park",
+    "primary_ssic_business_type": "Scrap Metal Recycling & Fabrication"
   }
 ]
