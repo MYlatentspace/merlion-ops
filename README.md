@@ -1,34 +1,68 @@
-# Merlion-Ops: Autonomous Regulatory Compliance & Auditing Graph
+**Executive Summary & Problem Matrix**
 
-An autonomous enterprise compliance agent engineered for the **Kaggle Agents for Business** track. Merlion-Ops automates corporate registry auditing and residential zoning risk detection using a deterministic execution loop powered by Gemini.
+Manual corporate auditing and spatial footprint verifications consume thousands of operational hours annually and remain highly susceptible to human oversight and regulatory friction. Merlion-Ops mitigates this systematic risk by establishing a production-grade, data-private autonomous AI Agent and Observability Harness. The system ingests unstructured corporate profiles, programmatically parses regulatory timelines, cross-references localized spatial zoning boundaries, and compiles deterministic, anonymized compliance ledgers.
 
-To provide real-world fidelity, the pipeline models regulatory frameworks from Singapore (symbolized by the iconic **Merlion**):
-* **ACRA:** Accounting and Corporate Regulatory Authority (Corporate registries).
-* **HDB:** Housing & Development Board (Public residential estates with strict commercial zoning limits).
+To anchor this platform in a robust, real-world regulatory environment, the operational parameters are modeled precisely after the statutory guidelines of the city-state of Singapore (symbolized by the iconic Merlion):
+
+- ACRA (Accounting and Corporate Regulatory Authority): The primary statutory body overseeing national entity registrations, legal profiles, and strict annual financial filing timelines.
+- HDB (Housing & Development Board): The national public housing authority managing high-density residential estates, enforcing rigorous zoning laws prohibiting unauthorized commercial or high-footprint logistics footprints.
+
+Mitigation of Enterprise AI Bottlenecks
+
+1. Zero-Token Latency & Quota De-risking: Rather than implementing fragile network polling or directly hitting external CKAN Datastore production APIs (which introduce token quota exhaustion risks and network instability), the harness utilizes a decoupled out-of-process data layer (mock_data.json) modeled strictly after production ACRA/HDB data schemas. This achieves deterministic, air-gapped sandboxed execution with absolute zero latency.
+2. Sovereign & Legal Risk Mitigation: Implements localized semantic rule validation constraints via an isolated policy layer (skills.md), ensuring perfect alignment with regional compliance thresholds.
+3. Elimination of Black-Box Skepticism: Instruments standard open-source tracing patterns, compiling automated structural execution span logs optimized for modern enterprise observability.
+
+**Architectural Blueprint & Data Flow**
+
+The platform implements a highly scalable Model = Agent + Harness design pattern. The frontend GUI functions strictly as the Harness (managing safety, telemetry, and ingestion parameters), while the backend functions as the Agent Execution Core (handling programmatic constraint evaluation over unparsed JSON arrays).
+
+[User Request / Ingress] ──► [Model Armor Security Shield] ──► [MCP Datastore Ingestion Layer] ──► [Gemini Core Agent Loop] ──► [Anonymized Report Generation] ──► [OpenTelemetry Spans Export]
+
+1. The Security Ingress Layer (Model Armor Interface): Prior to core processing, payloads pass through a local semantic security layer (run_model_armor_shield) that proactively intercepts prompt mutations, edge-case structural exceptions, and sensitive parameter triggers.
+2. Model Context Protocol (MCP) Decoupled Data Server: The orchestrator reads the entire unified global array (mock_data.json) directly from disk layout, separating raw database schemas cleanly from model weights.
+3. Core Cognitive Evaluation & Verification Matrix: The system ingests the raw data payload directly alongside a hardened system instruction array. The processing engine analyzes multivariable objects programmatically on the fly, scaling flawlessly from a minimal testing pool to thousands of lines of data without relying on fragile hardcoded string matches.
+
+
+**System Verification & Core Findings**
+
+To systematically validate the engine's programmatic reasoning without risking telemetry data leaks, the pipeline evaluates a synthetic ground-truth matrix embedded with injected operational discrepancies:
+
+Temporal Date Delta Discrepancy: The engine dynamically parses variable timelines, identifying that Delta-Merlion Logistics Ltd held an account_due_date of 2026-01-15 but an annual_return_date of 2026-06-20. It successfully flags a severe 5-month operational filing delinquency violating default corporate guidelines.
+
+Spatial/Zoning Violation Cluster: The pipeline programmatically cross-references an entity's declared classification (Logistics) with its registered postal address footprint type (HDB 3-Room Residential). It immediately exposes the regulatory compliance hazard of running high-footprint, heavy-traffic commercial supply chains within protected residential living spaces.
+
+Structural Invariant Guardrail Verification: To satisfy strict corporate data-privacy boundaries, the model forces an automated anonymization layer. Raw Unique Entity Numbers (UENs) and precise door numbers are systematically scrubbed and replaced with anonymous tokens (e.g., Company_A, Postal: 018XXX) before compiling the final span layer.
+
+**Observability Harness & Interactive Control Deck**
+- Telemetry & System Tracing
+System execution metrics, parameter boundaries, and evaluation nodes are mapped natively into standardized OpenTelemetry span payloads. By tracking data limits locally, the repository structure is fully optimized out-of-the-box for seamless routing into downstream corporate tracing environments such as Arize Phoenix. This grants enterprise risk teams micro-level visibility into the agent’s logic framework, tracing prompt metrics with zero semantic drift.
+
+- Non-Technical Graphical User Interface
+Merlion-Ops features a local, air-gapped graphical dashboard built on top of Streamlit. This interface translates raw backend JSON data tables into clean, color-coded, scannable Business Logic Cards. Compliance officers, internal auditors, and non-technical stakeholders can now dynamically toggle system safety guardrails and audit full cohort portfolios live without typing a single terminal command line.
+
 
 ---
+Local Sandbox Quickstart
+1. Execute the localized, data-private application harness on your workspace in seconds:
+git clone https://github.com/MYlatentspace/merlion-ops.git
+cd merlion-ops
 
-## Core Architecture
+2. Install core platform dependencies:
+pip install streamlit
 
-* **Model Armor Input Shield (`run_model_armor_shield`):** Pre-ingress isolation layer intercepting user inputs to scrub sensitive PII and neutralize prompt-injection vulnerabilities prior to inference.
-* **Decoupled Model Context Protocol (MCP):** An out-of-process tool datastore simulation (`mock_data.json`) modeling production registry tables. Eliminates active network polling, runtime latency, and cloud API token vulnerability.
-* **Cognitive Reasoning Engine (`gemini-2.5-flash`):** Evaluates multi-variable raw data strings against strict system invariants. A rigid `max_output_tokens=400` ceiling guarantees low latency and predictable token economics.
-* **Governance Telemetry:** Generates standard OpenTelemetry span structures natively, optimized for downstream ingestion into enterprise tracing platforms like Arize Phoenix.
+3. Launch the secure local server layer:
+streamlit run gui.py --server.address=127.0.0.1
 
----
+Access the secure GUI portal instantly at http://127.0.0.1:8501.
 
-## Evaluation Test Matrix
+## Repository Manifest & Structural Architecture
+The codebase implements a decoupled Model = Agent + Harness design pattern, clearly separating user-facing control systems from local data schemas and core verification execution blocks:
 
-The agent executes zero-shot, autonomous reasoning across four synthetic corporate entities to evaluate compliance pipelines under strict data-privacy masking constraints:
-1. **Delta-Merlion Logistics Ltd (FAIL):** Flags a 5-month temporal filing delinquency and an illegal heavy logistics operation inside a residential zone (`HDB 3-Room`).
-2. **Alpha Corporate Holdings (PASS):** Validates a fully compliant baseline operating within a designated commercial tower.
-3. **Apex Cloud Tech Solutions (PASS - Exemption):** Demonstrates deep semantic contextual reasoning by granting a *Home Office Exemption* for lightweight IT consulting within an HDB flat over a blind string match.
-4. **Vanguard Heavy Industrial Trades (FAIL):** Isolates a pure 6-month temporal filing delay while verifying its physical industrial park zoning footprint is correct.
+gui.py: The primary user control deck and presentation harness built on top of Streamlit. It manages safety toggles, orchestrates the out-of-process data injection loops, and renders color-coded compliance verdicts natively into a graphical user interface.
 
----
+app.py: The core headless orchestration pipeline logic layer. It manages the underlying automated reasoning loops, constraint calculation matrices, and terminal-level input shielding.
 
-## Repository Manifest
+mock_data.json: The unified data engine storage payload. It holds the synthetic corporate registry profiles, operational registration timelines, SSIC business classifications, and spatial zoning footprint variables.
 
-* `app.py`: Core orchestration pipeline logic, reasoning loops, and input shielding.
-* `mock_data.json`: Synthetic corporate registry entries, SSIC business classifications, and zoning tables.
-* `skills.md`: Documentation mapping capabilities directly to Day 2-4 course schemas.
+skills.md: The compliance rulebook parameter dictionary. This file maps active entity verification rules, temporal constraints, and spatial zoning boundaries directly to the system's cognitive execution layer.
