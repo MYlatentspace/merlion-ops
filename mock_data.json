@@ -1,0 +1,18 @@
+[
+  {
+    "uen": "SYNTH-9988-X",
+    "company_name": "Delta-Merlion Logistics Ltd",
+    "account_due_date": "2026-01-15",
+    "annual_return_date": "2026-06-20",
+    "postal_code": "018989",
+    "property_type": "HDB 3-Room Residential"
+  },
+  {
+    "uen": "SYNTH-1122-A",
+    "company_name": "Alpha Corporate Holdings",
+    "account_due_date": "2026-03-01",
+    "annual_return_date": "2026-03-05",
+    "postal_code": "048616",
+    "property_type": "Commercial Tower"
+  }
+]
