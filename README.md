@@ -9,7 +9,7 @@ To anchor this platform in a robust, real-world regulatory environment, the oper
 
 Mitigation of Enterprise AI Bottlenecks
 
-1. Zero-Token Latency & Quota De-risking: Rather than implementing fragile network polling or directly hitting external CKAN Datastore production APIs (which introduce token quota exhaustion risks and network instability), the harness utilizes a decoupled out-of-process data layer (mock_data.json) modeled strictly after production ACRA/HDB data schemas. This achieves deterministic, air-gapped sandboxed execution with absolute zero latency.
+1. Zero-Token Latency & Quota De-risking via MCP Datastore Ingestion: Rather than implementing fragile network polling or directly hitting external CKAN Datastore production APIs (which introduce token quota exhaustion risks and network instability), the architecture implements a decoupled Model Context Protocol (MCP) Datastore Ingestion Layer. Using a local sandbox resource mirror (mock_data.json) modeled strictly after production ACRA/HDB schemas, the harness handles bulk-data lookups out-of-process. This isolates the core LLM from high-frequency network queries, achieving deterministic, air-gapped sandbox execution with absolute zero latency.
 2. Sovereign & Legal Risk Mitigation: Implements localized semantic rule validation constraints via an isolated policy layer (skills.md), ensuring perfect alignment with regional compliance thresholds.
 3. Elimination of Black-Box Skepticism: Instruments standard open-source tracing patterns, compiling automated structural execution span logs optimized for modern enterprise observability.
 
