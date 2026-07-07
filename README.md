@@ -38,3 +38,13 @@ System execution metrics, parameter boundaries, and evaluation nodes are mapped 
 Merlion-Ops features a local, air-gapped graphical dashboard built on top of Streamlit. Designed around absolute simplicity, a compliance officer or non-technical auditor only has to click a single button—"🚀 Run Cohort Analytics Matrix"—to evaluate an entire portfolio.
 
 The interface translates raw backend JSON data tables into clean, color-coded, scannable Business Logic Cards. When scaled to millions of records, the interface completely prevents frontend clutter by aggregating clean, baseline passing profiles into a single high-level statistical summary banner, reserving individual visual cards exclusively for high-risk zoning and temporal anomalies that require manual administrative review. Non-technical stakeholders can also dynamically toggle system safety guardrails live without typing a single terminal command line.
+
+Local Sandbox Quickstart
+1. Clone the repository:
+git clone https://github.com/MYlatentspace/merlion-ops.git
+cd merlion-ops
+2. Install core platform dependencies:
+pip install streamlit
+3. Launch the secure local server layer:
+streamlit run gui.py --server.address=127.0.0.
+4. Access the secure GUI portal instantly at http://127.0.0.1:8501.
