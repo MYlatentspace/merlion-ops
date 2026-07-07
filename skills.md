@@ -8,22 +8,23 @@ This document outlines the structural skills, capabilities, and system tool mapp
 The framework leverages a decoupled protocol pattern to separate raw data fetching from core semantic model reasoning.
 * **Skill Identifier:** `fetch_mock_government_data`
 * **Interface Type:** Decoupled Data Server Simulation
-* **Data Source:** Synthetic `data.gov.sg` ACRA / HDB cross-reference datastore
-* **Operational Edge:** Pulls localized data structures safely without incurring external cloud token overhead or network processing dependency during evaluation cycles.
+* **Data Source:** Synthetic `data.gov.sg` ACRA / HDB cross-reference datastore (`mock_data.json`)
+* **Operational Edge:** Pulls localized data structures safely without incurring external cloud token overhead or network processing dependency during evaluation cycles. Built to handle macro data-lake footprints seamlessly by allowing the harness layer to stream records out-of-process in chunked blocks.
 
 ---
 
 ## 2. Context Engineering & Memory State Dynamics (Day 3 Schema)
-To maintain an efficient token footprint, the agent bypasses conversational bloat by relying on strict system invariants.
-* **Orchestration Choice:** `gemini-2.5-flash` for high multi-variable processing density.
-* **Context Preservation:** Injects dynamic JSON arrays directly into the execution prompt layer alongside a hardened system instruction matrix.
-* **Token Economic Ceiling:** Enforces a rigid `max_output_tokens=400` constraint, capping downstream resource usage and guaranteeing low operational latency.
+To maintain an efficient token footprint, the agent bypasses conversational bloat by relying on strict system invariants and stateless rule processing.
+* **Orchestration Choice:** `gemini-2.5-flash` chosen for rapid multi-variable constraint validation and low latency.
+* **Context Preservation:** Injects parsed JSON data structures directly into the execution prompt layer alongside a hardened system instruction matrix.
+* **Analysis Constraints:** Forces structural cross-referencing of datetime variables (identifying temporal filing variances >= 1 month) and spatial boundaries (matching entity `classification` profiles against residential `address_type` fields).
+* **Token Economic Ceiling:** Enforces a rigid `max_output_tokens=400` constraint and a deterministic `temperature=0.1` configuration, capping downstream resource usage and preventing reasoning drift.
 
 ---
 
 ## 3. Defensive Governance & Telemetry Guardrails (Day 4 Schema)
-System safety and regional corporate data compliance are aggressively enforced via two explicit boundaries.
+System safety and regional corporate data compliance are aggressively enforced via localized execution boundaries.
 * **Skill Identifier:** `run_model_armor_shield`
-* **Security Filter Layer:** Intercepts user inputs *prior* to model inference to detect prompt injection exploits and block sensitive PII data leakage.
-* **Anonymization Invariant:** The model is structurally barred from printing raw Unique Entity Numbers (UENs) or exact public postal codes, replacing them with compliance-safe tokens (e.g., `Postal: 018XXX`).
-* **Telemetry Output:** Employs standard OpenTelemetry formatting, compiling execution traces cleanly for downstream observability pipelines.
+* **Security Filter Layer:** Intercepts user queries *prior* to model inference via an automated ingress inspection loop to detect prompt injection exploits and block sensitive PII data leakage.
+* **Anonymization Invariant:** Enforces strict structural privacy masking. The pipeline scrubs raw identifying dimensions and unique identifiers locally, formatting them into anonymous tokens (e.g., `Company_Alpha`, `Postal: 018XXX`) before data serialization.
+* **Telemetry Output:** Compiles high-frequency execution traces silently behind the scenes into standardized OpenTelemetry span payloads. This isolates macro data fires from the presentation dashboard, routing high-volume logs directly to downstream observability environments such as Arize Phoenix.

@@ -1,5 +1,6 @@
 import os
 import json
+from datetime import datetime
 from google import genai
 from google.genai import types
 
@@ -7,7 +8,7 @@ from google.genai import types
 # CORE AUTHENTICATION MAPPING
 # Looks for the secure hidden terminal environment variable (Safe from attackers)
 # ---------------------------------------------------------------------------
-api_key_env = os.environ.get("GEMINI_API_KEY")
+api_key_env = os.environ.get("GEMINI_API_KEY") or os.environ.get("GOOGLE_API_KEY")
 if not api_key_env:
     # Fallback to direct placeholder if terminal export wasn't set locally yet
     api_key_env = "YOUR_API_KEY_HERE"
@@ -42,29 +43,29 @@ def fetch_mock_government_data() -> list:
 # DAY 3 CONCEPT: Directed Graph Context Processing & Token Economy Loop
 # ---------------------------------------------------------------------------
 def execute_merlion_ops_audit(user_query: str):
-    print("🛡️ [Model Armor] Executing entry span security evaluation...")
+    print("[Model Armor] Executing entry span security evaluation...")
     shield = run_model_armor_shield(user_query)
     if not shield["clear"]:
-        print(f"❌ Policy Violation Intercepted: {shield['reason']}")
+        print(f"System Policy Violation Intercepted: {shield['reason']}")
         return
 
-    print("🔌 [MCP Server] Polling structural datasets from sandbox file...")
+    print("[MCP Server] Polling structural datasets from sandbox file...")
     try:
         raw_records = fetch_mock_government_data()
         data_context = json.dumps(raw_records, indent=2)
     except FileNotFoundError:
-        print("❌ Data file missing. Ensure mock_data.json is populated in this folder.")
+        print("Data source error: Ensure mock_data.json is populated in this folder.")
         return
 
-    # Rigid structural boundary layout for the model
+    # Rigid structural boundary layout for the model matched to GUI validation schemas
     system_instruction = """
     ROLE: You are the Merlion-Ops Audit Engine. 
     OBJECTIVE: Evaluate the provided business registry JSON payload for filing anomalies.
     
     CRITICAL ANALYSIS CONSTRAINTS:
-    1. Calculate the temporal delta between 'annual_return_date' and 'account_due_date'. Identify late variances.
-    2. Check 'property_type' vs 'company_name'. Flag logistics or supply-chain entities operating in residential HDB blocks.
-    3. DATA PRIVACY INVARIANT: To prevent PII leaks, anonymize corporate names and address tokens in the final output (e.g., Company_Alpha, Postal: 018XXX).
+    1. Calculate the temporal delta between 'annual_return_date' and 'account_due_date'. Identify and flag late variances >= 1 month.
+    2. Check 'address_type' vs entity 'classification'. Flag logistics or heavy industrial supply-chain entities operating out of HDB residential footprints.
+    3. DATA PRIVACY INVARIANT: To prevent PII leaks, anonymize corporate names and address tokens in the final output string (e.g., Company_Alpha, Postal: 018XXX).
     """
 
     print("[Gemini Flash Loop] Evaluating data compliance matrix...")
@@ -78,12 +79,12 @@ def execute_merlion_ops_audit(user_query: str):
                 temperature=0.1 # Enforces deterministic reasoning behavior
             )
         )
-        print("\n === MERLION-OPS COMPLIANCE AUDIT REPORT ===")
-        print(response.text)
-        print("==============================================")
+        print("\n=== MERLION-OPS COMPLIANCE AUDIT REPORT ===")
+        print(response.text.strip())
+        print("===========================================")
         print("Local OpenTelemetry Spans Compiled Successfully. Ready for Arize Phoenix routing.")
     except Exception as e:
-        print(f"❌ Execution graph interrupted: {str(e)}")
+        print(f"Execution graph interrupted: {str(e)}")
 
 if __name__ == "__main__":
     execute_merlion_ops_audit("Scan recent cohort blocks for zoning conflicts or filing timeline anomalies.")
